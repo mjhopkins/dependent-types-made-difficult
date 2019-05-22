@@ -263,3 +263,5 @@ TSWLatexianTemp*
 # glossaries-extra
 *.ist
 
+# editor files
+.idea
