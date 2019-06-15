@@ -156,6 +156,7 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
 \DeclareMathOperator{\Type}{Type}
 \DeclareMathOperator{\List}{List}
 \DeclareMathOperator{\Nat}{Nat}
+\DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\String}{String}
 \DeclareMathOperator{\Ob}{Ob}
 \DeclareMathOperator{\Lan}{Lan}
@@ -423,11 +424,11 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
     \frametitle{Advantages}
 
     \begin{itemize}
+      \item The internal language is valid in every model
       \item More easily prove properties about a type theory using CT
       \item CT proofs using the internal language can be easier
-      \item Can use the internal language to define internal structures
       \item The CT can illuminate the TT, and vice versa
-      \item The internal language is valid in every model
+      \item Can use the internal language to define internal structures
     \end{itemize}
   \end{frame}
 
@@ -595,15 +596,15 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
     \frametitle{Dependent types}
 
     \begin{align*}
-      n: \mathrm{Nat} & \vdash \mathrm{IsEven}\,n : \mathrm{Type}
+      n: \mathrm{Nat} & \;\vdash\; \mathrm{IsEven}\,n : \mathrm{Type}
     \end{align*}
 
     \vskip2em
 
     \begin{code}
       data IsEven (n : Nat) : Type where
-      ZEven : IsEven 0
-      SSEven : IsEven n -> IsEven (n + 2)
+        ZEven : IsEven 0
+        SSEven : IsEven n -> IsEven (n + 2)
     \end{code}
 
   \end{frame}
@@ -613,13 +614,15 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
     \frametitle{Dependent types}
 
     \begin{align*}
-      n: \mathrm{Nat}, a : \mathrm{Type} & \vdash \mathrm{Vect}_n(a) : \mathrm{Type}
+      n: \mathrm{Nat}, a : \mathrm{Type} & \;\vdash\; \mathrm{Vect}_n(a) : \mathrm{Type}
     \end{align*}
+
+    \vskip2em
 
     \begin{code}
       data Vect (n : Nat) (a : Type) : Type where
-      Nil : Vect 0 a
-      (::) : a -> Vect n a -> Vect (n + 1) a
+        Nil : Vect 0 a
+        (::) : a -> Vect n a -> Vect (n + 1) a
     \end{code}
 
   \end{frame}
@@ -627,8 +630,10 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
   \begin{frame}[fragile]
     \frametitle{Dependent product type}
 
+    \begin{center}
+
     \begin{code}
-      replicate : (n : Nat) -> a -> Vect n a
+          replicate : (n : Nat) -> a -> Vect n a
     \end{code}
 
     \begin{align*}
@@ -637,24 +642,30 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
     \end{align*}
 
     \[
-      a \to b \equiv \prod_{\_ : a} b
+      a \to b :\equiv \prod_{\_\, : a} b
     \]
+
+    \end{center}
   \end{frame}
 
   \begin{frame}[fragile]
     \frametitle{Dependent sum type}
 
+    \begin{center}
+
     \begin{code}
-      evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
+evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
     \end{code}
 
     \begin{align*}
-      \operatorname{evenLenLists} = \sum_{l : \List(a)} \sum_{m:\N} \operatorname{length}(l) = 2m
+      \operatorname{evenLenLists} = \sum_{l : \List(\Int)} \sum_{m:\N} \operatorname{length}(l) = 2m
     \end{align*}
 
     \[
-      (a, b) \equiv \sum_{\_ : a} b
+      (a, b) :\equiv \sum_{\_ \,: a} b
     \]
+
+    \end{center}
   \end{frame}
 
   \begin{frame}
@@ -672,7 +683,7 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
     also arrows: functions
     \begin{align*}
       f &: a \to b \\
-      [[f]]  &:[[a]] \to [[b]]
+      [\![f]\!]  &: [\![a]\!] \to [\![b]\!]
     \end{align*}
   \end{frame}
 
