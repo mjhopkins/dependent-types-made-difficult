@@ -746,7 +746,7 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
 
     \begin{center}
 
-      \begin{tikzpicture}[scale=.5]
+      \begin{tikzpicture}[scale=.5,>=stealth]
         \begin{scope}
           \def\x{2}
           \begin{scope}[yshift=7.5cm]
@@ -776,7 +776,10 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
             \node at (\x, 1) {zeroEven};
           \end{scope}
 
-          \node at (\x,-1) {$\Set\!/\N$};
+          \node (N) at (\x,-2) {$\N$};
+          \draw[->,very thick] (\x, 0) -- (N);
+
+          \node at (\x,-5) {$\Set\!/\N$};
         \end{scope}
         \begin{scope}[xshift=10cm]
           \def\x{2}
@@ -805,7 +808,10 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
             \node at (\x, 1) {Will};
           \end{scope}
 
-          \node at (\x,-1) {$\Set\!/\Bank$};
+          \node (N) at (\x,-2) {$\Bank$};
+          \draw[->,very thick] (\x, 0) -- (N);
+
+          \node at (\x,-5) {$\Set\!/\Bank$};
         \end{scope}
       \end{tikzpicture}
 
