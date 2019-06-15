@@ -349,9 +349,9 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
     \frametitle{Cartesian closed categories}
     A Cartesian closed category is a category with function objects.
 
-    $$
+    \[
     \mathcal{C}(A \times B, C) \cong \mathcal{C}(A, C^B)
-    $$
+    \]
 
     In Haskell, this isomorphism is called``curry".
 
@@ -641,9 +641,9 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
       &=  \prod_{a : \Type} \prod_{n : \mathbb{N}} a \to \Vect_n(a)
     \end{align*}
 
-    \[
-      a \to b :\equiv \prod_{\_\, : a} b
-    \]
+      \[
+        a \to b :\equiv \prod_{\_\, : a} b
+      \]
 
     \end{center}
   \end{frame}
@@ -657,13 +657,13 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
 evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
     \end{code}
 
-    \begin{align*}
-      \operatorname{evenLenLists} = \sum_{l : \List(\Int)} \sum_{m:\N} \operatorname{length}(l) = 2m
-    \end{align*}
+      \begin{align*}
+        \operatorname{evenLenLists} = \sum_{l : \List(\Int)} \sum_{m:\N} \operatorname{length}(l) = 2m
+      \end{align*}
 
-    \[
-      (a, b) :\equiv \sum_{\_ \,: a} b
-    \]
+      \[
+        (a, b) :\equiv \sum_{\_ \,: a} b
+      \]
 
     \end{center}
   \end{frame}
