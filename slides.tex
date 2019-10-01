@@ -173,6 +173,7 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
 \DeclareMathOperator{\BranchOf}{BranchOf}
 \DeclareMathOperator{\IsEven}{IsEven}
 \DeclareMathOperator{\CustomerOf}{CustomerOf}
+\DeclareMathOperator{\Person}{Person}
 
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 
@@ -345,6 +346,220 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
     \end{center}
   \end{frame}
 
+  \begin{frame}
+    \frametitle{Categorical semantics}
+    \begin{center}
+
+
+      %  \colorbox{green}{
+      \begin{minipage}{.9\textwidth}
+        Dependent type theory is the \textit{internal language} of ???.
+      \end{minipage}
+      %  }
+
+      \vskip1em
+
+      which means
+
+      \vskip.5em
+
+      %  \colorbox{gray}{
+      \begin{minipage}{.9\textwidth}
+        We can interpret dependently typed programs in any ???.
+      \end{minipage}
+      %  }
+
+    \end{center}
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{Categories}
+
+    \begin{center}
+      \begin{tikzpicture}[>=latex,scale=0.6]
+        \def\r{1mm}
+        \begin{scope}[->,shorten >=1pt]
+
+          \begin{scope}
+            \fill (0,1) circle (\r) coordinate (b);
+            \fill (0,3) circle (\r) coordinate (t);
+
+            \draw [visible on=<2->] (t) arc (30:330:2cm);
+          \end{scope}
+
+          \begin{scope}[xshift=2cm]
+            \fill (0,4) circle (\r) coordinate (t);
+            \fill (-0.5,2) circle (\r) coordinate (m1);
+            \fill (0.5,2) circle (\r) coordinate (m2);
+            \fill (-1,0) circle (\r) coordinate (b1);
+            \fill (1,0) circle (\r) coordinate (b2);
+
+            \draw [visible on=<2->] (m1) -- (t);
+            \draw [visible on=<2->] (m2) -- (t);
+            \draw [visible on=<2->] (m1) -- (m2);
+            \draw [visible on=<2->] (b1) -- (m1);
+            \draw [visible on=<2->] (b2) -- (m2);
+          \end{scope}
+
+          \begin{scope}[xshift=5cm]
+            \fill (-1,4) circle (\r) coordinate (t1);
+            \fill (0,4) circle (\r) coordinate (t2);
+            \fill (1,4) circle (\r) coordinate (t3);
+            \fill (0,0) circle (\r) coordinate (b);
+
+            \draw [visible on=<2->] (t2) to [bend left=7] (b);
+            \draw [visible on=<2->] (t2) to [bend right=7] (b);
+            \draw [visible on=<2->] (t2) -- (t1);
+            \draw [visible on=<2->] (t2) -- (t3);
+          \end{scope}
+        \end{scope}
+      \end{tikzpicture}
+    \end{center}
+
+    $\text{Ob\,C} : \Set$
+    \visible<2->{\qquad $C(a,b) = \Hom(a,b): \Set$ }
+
+    \visible<3->{ $\comp : C(b,c) \times C(a,b) \rightarrow C(a,c)$ }
+    \visible<3->{ $1_a \in C(a,a)$ }
+
+    \visible<3->{ $1_b\comp f = f = f \comp 1_a$ }
+    \visible<3->{ $h\comp(g\comp f) = (h\comp g) \comp f$ }
+  \end{frame}
+
+  {
+  \usebackgroundtemplate{%
+  \vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics[height=\paperheight]{graphics/shadow-4.png}\hfil}\vfil}
+  % \vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics[width=1.5in]{graphics/shadow-4.png}\hfil}\vfil}
+  }
+  % \usebackgroundtemplate{%
+  % \includegraphics[height=\paperheight]{graphics/shadow-4.png}%
+  % \includegraphics[width=\paperwidth]{graphics/shadow-4.png}}
+  % }
+
+  \begin{frame}
+    \frametitle{Functors}
+  \end{frame}
+  }
+
+  \begin{frame}
+    \frametitle{Functors}
+    A functor from $C \rightarrow D$ draws a picture of $C$ in $D$.
+
+    \begin{center}
+      \begin{tikzpicture}[>=latex,scale=0.4]
+
+        \def\r{1mm}
+
+        %  \draw[step=0.5cm,help lines] (-2.4,-1.6) grid (3.4,2.4);
+
+
+        {
+        \begin{scope}[->,shorten >=1pt]
+
+          \begin{scope}
+            \fill (0,1) circle (\r) coordinate (b);
+            \fill (0,3) circle (\r) coordinate (t);
+
+            \draw (t) arc (30:330:2cm);
+          \end{scope}
+
+          \begin{scope}[xshift=2cm]
+            \fill (0,4) circle (\r) coordinate (t);
+            \fill (-0.5,2) circle (\r) coordinate (m1);
+            \fill (0.5,2) circle (\r) coordinate (m2);
+            \fill (-1,0) circle (\r) coordinate (b1);
+            \fill (1,0) circle (\r) coordinate (b2);
+
+            \draw (m1) -- (t);
+            \draw (m2) -- (t);
+            \draw (m1) -- (m2);
+            \draw (b1) -- (m1);
+            \draw (b2) -- (m2);
+          \end{scope}
+
+          \begin{scope}[xshift=5cm]
+            \fill (-1,4) circle (\r) coordinate (t1);
+            \fill (0,4) circle (\r) coordinate (t2);
+            \fill (1,4) circle (\r) coordinate (t3);
+            \fill (0,0) circle (\r) coordinate (b);
+
+            \draw (t2) to [bend left=7] (b);
+            \draw (t2) to [bend right=7] (b);
+            \draw (t2) -- (t1);
+            \draw (t2) -- (t3);
+          \end{scope}
+        \end{scope}
+        }
+
+
+        \begin{scope}[xshift=15cm]
+          {
+          \begin{scope}[->,shorten >=1pt]
+
+            \begin{scope}
+              \fill (0,1) circle (\r) coordinate (b);
+              \fill (0,3) circle (\r) coordinate (t);
+
+              \draw (t) arc (30:330:2cm);
+            \end{scope}
+
+            \begin{scope}[xshift=2cm]
+              \fill (0,4) circle (\r) coordinate (t);
+              \fill (0.0,2) circle (\r) coordinate (m);
+              \fill (-1,0) circle (\r) coordinate (b1);
+              \fill (1,0) circle (\r) coordinate (b2);
+
+              \draw (m) to [bend left=20] (t);
+              \draw (m) to [bend right=20] (t);
+%%              \draw (m1) -- (m2);
+              \draw (b1) -- (m);
+              \draw (b2) -- (m);
+            \end{scope}
+
+            \begin{scope}[xshift=5cm]
+              \fill (-1,4) circle (\r) coordinate (t1);
+              \fill (0,4) circle (\r) coordinate (t2);
+              \fill (1,4) circle (\r) coordinate (t3);
+              \fill (0,0) circle (\r) coordinate (b);
+
+              \draw (t2) to (b);
+              \draw (t2) -- (t1);
+              \draw (t2) -- (t3);
+            \end{scope}
+          \end{scope}
+          }
+
+        \end{scope}
+
+        \draw [->,snake=snake,
+        segment amplitude=.4mm,
+        segment length=2mm,
+        line after snake=1mm] (7.5,2) -- (10,2)
+        % node [above,text width=3cm,text centered,midway]
+        node [above,midway]
+        { $F$ };
+
+        \begin{pgfonlayer}{background}
+          \filldraw [line width=4mm,join=round,black!10]
+          (-4,-1) rectangle (6.5,5)
+          (11,-1) rectangle (21.5,5);
+        \end{pgfonlayer}
+
+      \end{tikzpicture}
+      \begin{align*}
+        F&: \Ob C \rightarrow \Ob D \\
+        F&: C(a,b) \rightarrow  D(Fa,Fb) \text { i.e. \lstinline{fmap}}
+      \end{align*}
+      \begin{align*}
+        F(1) &= 1 \\
+        F(f\comp g) &= F(f) \comp F(g)
+      \end{align*}
+    \end{center}
+
+
+  \end{frame}
+
+
   \begin{frame}[fragile]
     \frametitle{Cartesian closed categories}
     A Cartesian closed category is a category with function objects.
@@ -429,6 +644,7 @@ literate={=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}2 {:}{{$\vcentcolon$}}1 {::
       \item CT proofs using the internal language can be easier
       \item The CT can illuminate the TT, and vice versa
       \item Can use the internal language to define internal structures
+      \item Refinement of denotational semantics
     \end{itemize}
   \end{frame}
 
@@ -777,9 +993,9 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
           \end{scope}
 
           \node (N) at (\x,-2) {$\N$};
-          \draw[->,very thick] (\x, 0) -- (N);
+          \draw[->,very thick,>=stealth] (\x, 0) -- (N);
 
-          \node at (\x,-5) {$\Set\!/\N$};
+          \node at (\x,-4) {$\Set\!/\N$};
         \end{scope}
         \begin{scope}[xshift=10cm]
           \def\x{2}
@@ -811,7 +1027,7 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
           \node (N) at (\x,-2) {$\Bank$};
           \draw[->,very thick] (\x, 0) -- (N);
 
-          \node at (\x,-5) {$\Set\!/\Bank$};
+          \node at (\x,-4) {$\Set\!/\Bank$};
         \end{scope}
       \end{tikzpicture}
 
@@ -822,7 +1038,7 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
     \frametitle{Over-categories}
 
     \[
-      X \in \mathcal{C}, \mathcal{C}/X
+       \mathcal{C}/X \text{ where } X \in \mathcal{C}
     \]
 
     \begin{minipage}{\textwidth}
@@ -854,24 +1070,42 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
 
   \begin{frame}
     \frametitle{Over-categories}
-    \begin{minipage}{\textwidth}
-      \begin{minipage}{.5\textwidth}
-        \begin{tikzpicture}[scale=.5]
+    \begin{center}
+
+      \begin{tikzpicture}[scale=.5]
+        \begin{scope}[>=latex,line width=1pt,color=red,visible on=<2->]
+          \def\rlw{1pt}
+          \draw[>=stealth,line width=\rlw,color=red] (4,7) -- (10,7);
+
+          \draw [->] (4,10.5) -- (10,10.5);
+          \draw [->] (4,9.5) -- (10,10.5);
+          \draw [->] (4,8.5) -- (10,8.5);
+
+          \draw [->] (4,7) -- (10,7);
+          \draw [->] (4,6) -- (10,7);
+
+          \draw [->] (4,4.5) -- (10,3.5);
+
+          \draw [->] (4,2) -- (10,1);
+          \draw [->] (4,1) -- (10,2);
+        \end{scope}
+
+        \begin{scope}
           \def\x{2}
-          \begin{scope}[yshift=6.5cm]
+          \begin{scope}[yshift=7.5cm]
             \draw [fill=yellow] (0,0.5) rectangle (4, 3.5);
             \node[right] at (\x+2, 3) {ANZ};
             \node at (\x, 3) {Alice};
             \node at (\x, 2) {Albert};
             \node at (\x, 1) {Anne-Marie};
           \end{scope}
-          \begin{scope}[yshift=4cm]
+          \begin{scope}[yshift=5cm]
             \draw [fill=yellow] (0,0.5) rectangle (4, 2.5);
             \node[right] at (\x+2, 2) {CBA};
             \node at (\x, 2) {Calvin};
             \node at (\x, 1) {Colin};
           \end{scope}
-          \begin{scope}[yshift=2.5cm]
+          \begin{scope}[yshift=3.5cm]
             \draw [fill=yellow] (0,0.5) rectangle (4, 1.5);
             \node[right] at (\x+2, 1) {NAB};
             \node at (\x, 1) {Nathan};
@@ -882,10 +1116,8 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
             \node at (\x, 2) {Wendy};
             \node at (\x, 1) {Will};
           \end{scope}
-        \end{tikzpicture}
-      \end{minipage}%
-      \begin{minipage}{.5\textwidth}
-        \begin{tikzpicture}[scale=.5]
+        \end{scope}
+        \begin{scope}[xshift=10cm]
           \def\x{2}
           \begin{scope}[yshift=7.5cm]
             \draw [fill=yellow] (0,0.5) rectangle (4, 3.5);
@@ -912,9 +1144,18 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
             \node at (\x, 2) {Wahroonga};
             \node at (\x, 1) {Woollahra};
           \end{scope}
-        \end{tikzpicture}
-      \end{minipage}
-    \end{minipage}
+        \end{scope}
+
+        \def\x{2}
+        \node (b) at (7.0, -1) {$\Bank$};
+        \draw [->,very thick,>=stealth,shorten <=10] (\x,.5) -- (b);
+        \draw [->,very thick,>=stealth,shorten <=10] (10.0+\x,.5) -- (b);
+
+%        \draw[line width=2pt] (0,0) .. controls (1,1) .. (4,0)
+%        .. controls (5,0) and (5,1) .. (4,1);
+%        \draw[color=red] (0,0) -- (1,1) -- (4,0) -- (5,0) -- (5,1) -- (4,1);
+      \end{tikzpicture}
+    \end{center}
 
     fibre $(A)_x = p^{-1} x$
 
@@ -978,7 +1219,11 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
           \node[right] at (\x+2, 1) {Woollahra};
           \node at (\x, 1) {Wendy};
         \end{scope}
-      \end{tikzpicture}\frametitle{}
+
+        \node (b) at (\x, -2) {$\Branch$};
+        \draw [->,very thick,>=stealth,shorten <=5] (\x,.5) -- (b);
+
+      \end{tikzpicture}
     \end{center}
   \end{frame}
 
@@ -1011,10 +1256,13 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
         \begin{scope}[yshift=-1cm]
           \node at (\x, 1) {\vdots};
         \end{scope}
-      \end{tikzpicture}\frametitle{}
+
+        \node (b) at (\x, -3.5) {$\String$};
+        \draw [->,very thick,>=stealth,shorten <=5] (\x,-1) -- (b);
+      \end{tikzpicture}
 
       \[
-        s : \String \vdash \IsEven (\length s) : \Type
+        s : \String \vdash \IsEven\; (\length s) : \Type
       \]
     \end{center}
   \end{frame}
@@ -1110,6 +1358,11 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
               \node at (\x, 1) {cherry};
             \end{scope}
           \end{scope}
+
+          \node (b) at (4.5, -1) {$\ast$};
+          \draw [->,very thick,>=stealth] (\x,.5) -- (b);
+          \draw [->,very thick,>=stealth] (5+\x,.5) -- (b);
+
         \end{tikzpicture}
 
       \end{minipage}% This must go next to `\end{minipage}`
@@ -1174,6 +1427,11 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
               \node at (\x, 1) {a b c};
             \end{scope}
           \end{scope}
+
+          \node (b) at (4.5, -1) {$\N$};
+          \draw [->,very thick,>=stealth] (\x,.5) -- (b);
+          \draw [->,very thick,>=stealth] (5+\x,.5) -- (b);
+
         \end{tikzpicture}
       \end{minipage}
 
@@ -1286,6 +1544,11 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
             \end{scope}
 
           \end{scope}
+
+          \node (b) at (4.5, -1) {$\Bank$};
+          \draw [->,very thick,>=stealth] (\x,.5) -- (b);
+          \draw [->,very thick,>=stealth] (5+\x,.5) -- (b);
+
         \end{scope}
         \begin{scope}[xshift=14cm]
           \begin{scope}[xshift=0]
@@ -1395,6 +1658,10 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
             \end{scope}
           \end{scope}
 
+          \node (b) at (4.5, -1) {$\Branch$};
+          \draw [->,very thick,>=stealth] (\x,.5) -- (b);
+          \draw [->,very thick,>=stealth] (5+\x,.5) -- (b);
+
         \end{scope}
       \end{tikzpicture}
 
@@ -1421,6 +1688,33 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
     \begin{lemma}
       In this case all the slice categories $\mathcal{C}/X$ are Cartesian closed.
     \end{lemma}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Categorical semantics}
+    \begin{center}
+
+
+      %  \colorbox{green}{
+      \begin{minipage}{.9\textwidth}
+        Dependent type theory is the \textit{internal language} of \\
+        \textit{locally Cartesian closed categories}.
+      \end{minipage}
+      %  }
+
+      \vskip1em
+
+      which means
+
+      \vskip.5em
+
+      %  \colorbox{gray}{
+      \begin{minipage}{.9\textwidth}
+        We can interpret dependently typed programs in any LCCC.
+      \end{minipage}
+      %  }
+
+    \end{center}
   \end{frame}
 
   {\usebackgroundtemplate%
@@ -1475,9 +1769,9 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
     \frametitle{$\prod_{x:X} := \prod_{!_X} \quad !_X: X \to \ast$}
 
     \begin{center}
-      \[
+      $
         \Set/X(f^\ast p, q) \cong \Set/\!\ast(p, \prod_f q)
-      \]
+      $
 
       \vskip-1em
 
@@ -1528,6 +1822,10 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
                 \node at (\x, 1) {Garry};
               \end{scope}
             \end{scope}
+            \node (b) at (4.5, -1) {$\Person$};
+            \draw [->,very thick,>=stealth] (\x,.5) -- (b);
+            \draw [->,very thick,>=stealth] (5+\x,.5) -- (b);
+
           \end{tikzpicture}
         \end{minipage}% This must go next to `\end{minipage}`
         \begin{minipage}{.5\textwidth}
@@ -1553,6 +1851,10 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
                 \node at (\x, 3.5) {$\prod_{n=0}^\infty \{\mathrm{m},\mathrm{f}\}$};
               \end{scope}
             \end{scope}
+            \node (b) at (4.5, -1) {$\ast$};
+            \draw [->,very thick,>=stealth] (\x,0) -- (b);
+            \draw [->,very thick,>=stealth] (5+\x,0) -- (b);
+
           \end{tikzpicture}
         \end{minipage}
       \end{minipage}
@@ -1569,6 +1871,8 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
   \begin{frame}
     \frametitle{$\prod_{\bankOf}: \Set/\Branch \to \Set/\Bank$}
     \begin{center}
+
+      \vskip-2em
 
       \begin{tikzpicture}[scale=.4]
         %    \begin{tikzpicture}[xscale=.25,yscale=.5]
@@ -1680,6 +1984,11 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
               \node at (\x+.5, 1) {\smiley};
             \end{scope}
           \end{scope}
+
+          \node (b) at (4.5, -1) {$\Branch$};
+          \draw [->,very thick,>=stealth] (\x,.5) -- (b);
+          \draw [->,very thick,>=stealth] (5+\x,.5) -- (b);
+
         \end{scope}
         \begin{scope}[xshift=14cm]
           \begin{scope}[xshift=0]
@@ -1730,6 +2039,9 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
               \node at (\x, 1.5) {\dots};
             \end{scope}
           \end{scope}
+          \node (b) at (4.5, -1) {$\Bank$};
+          \draw [->,very thick,>=stealth] (\x,.5) -- (b);
+          \draw [->,very thick,>=stealth] (5+\x,.5) -- (b);
 
         \end{scope}
       \end{tikzpicture}
@@ -1811,15 +2123,19 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
 
     MacLane and Moerdijk, \textit{Sheaves in Geometry and Logic}, IV.7
 
+    Bart Jacobs, \textit{Categorical Logic and Type Theory}
+
     The nLab, ncatlab.org/nlab
 
+    Compiling to Categories (YouTube)
+
   \end{frame}
 
-  \begin{frame}
-    \frametitle{}
-    \begin{center}
-
-    \end{center}
-  \end{frame}
+%  \begin{frame}
+%    \frametitle{}
+%    \begin{center}
+%
+%    \end{center}
+%  \end{frame}
 
 \end{document}
