@@ -1268,7 +1268,7 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
   \end{frame}
 
   \begin{frame}[fragile]
-    \frametitle{Substitution = pullback aka change of base}
+    \frametitle{Substitution = pullback aka change of base = join}
 
     \begin{align*}
       \bankOf &: \Branch \to \Bank \\
@@ -1279,7 +1279,7 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
   \end{frame}
 
   \begin{frame}[fragile]
-    \frametitle{Substitution = pullback aka change of base}
+    \frametitle{Substitution = pullback aka change of base = join}
 
     \[
       \begin{tikzcd}
@@ -1298,6 +1298,10 @@ evenLenLists = (l : List Int ** m : Nat ** length l = 2 * m)
       \bankOf^\ast \Customer
       \\
       &= \left\{ (br, c) \middle| \bankOf(br) = p(c)\right\}
+      \\
+      &= \text{select * from Branch inner join Customer}
+      \\
+      &\phantom{=} \text{ on Branch.bank = Customer.bank}
     \end{align*}
 
   \end{frame}
